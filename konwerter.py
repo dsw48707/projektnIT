@@ -2,6 +2,8 @@ import argparse
 import json
 import yaml
 import xml.etree.ElementTree as ET
+import xmltodict
+import xml.dom.minidom
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Konwerter plików')
