@@ -20,10 +20,7 @@ def load_json_file(file_path):
         except json.JSONDecodeError:
             print('Błąd: Niepoprawny format pliku JSON.')
             return None
-         
- def save_json_file(data, file_path):
-    with open(file_path, 'w') as file:
-        json.dump(data, file, indent=4)
+        
  
  def load_yaml_file(file_path):
     with open(file_path, 'r') as file:
@@ -33,6 +30,10 @@ def load_json_file(file_path):
         except yaml.YAMLError:
             print('Błąd: Niepoprawny format pliku YAML.')
             return None
+          
+  def save_json_file(data, file_path):
+    with open(file_path, 'w') as file:
+        json.dump(data, file, indent=4)
           
   def save_yaml_file(data, file_path):
     with open(file_path, 'w') as file:
