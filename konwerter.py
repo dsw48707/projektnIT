@@ -71,3 +71,4 @@ def convert_file(input_file, output_file, output_format):
 if __name__ == '__main__':
     args = parse_arguments()
     convert_file(args.input_file, args.output_file, args.format)
+
