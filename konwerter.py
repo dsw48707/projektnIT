@@ -48,4 +48,8 @@ def load_json_file(file_path):
     with open(file_path, 'w') as file:
         yaml.dump(data, file)
   
+  def save_xml_file(root, file_path):
+    tree = ET.ElementTree(root)
+    tree.write(file_path)
+  
   
