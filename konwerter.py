@@ -31,6 +31,15 @@ def load_json_file(file_path):
             print('Błąd: Niepoprawny format pliku YAML.')
             return None
           
+  def load_xml_file(file_path):
+    try:
+        tree = ET.parse(file_path)
+        root = tree.getroot()
+        return root
+    except ET.ParseError:
+        print('Błąd: Niepoprawny format pliku XML.')
+        return None
+          
   def save_json_file(data, file_path):
     with open(file_path, 'w') as file:
         json.dump(data, file, indent=4)
