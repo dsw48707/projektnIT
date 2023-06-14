@@ -34,4 +34,8 @@ def load_json_file(file_path):
             print('Błąd: Niepoprawny format pliku YAML.')
             return None
           
+  def save_yaml_file(data, file_path):
+    with open(file_path, 'w') as file:
+        yaml.dump(data, file)
+  
   
