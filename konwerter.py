@@ -4,6 +4,7 @@ import yaml
 import xml.etree.ElementTree as ET
 import xmltodict
 import xml.dom.minidom
+import sys
 
 def load_file(file_path):
     _, file_extension = os.path.splitext(file_path)
