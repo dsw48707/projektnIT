@@ -1,8 +1,9 @@
-import sys
-import os
+import argparse
 import json
 import yaml
 import xml.etree.ElementTree as ET
+import xmltodict
+import xml.dom.minidom
 
 def load_file(file_path):
     _, file_extension = os.path.splitext(file_path)
