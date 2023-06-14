@@ -71,5 +71,3 @@ if __name__ == '__main__':
     output_file_path = sys.argv[2]
 
     convert_file(input_file_path, output_file_path)
-
-
