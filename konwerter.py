@@ -7,53 +7,55 @@ import xml.dom.minidom
 import sys
 import os
 
- parser = argparse.ArgumentParser(description='konwerter')
+ def load_file(file_path):
+    _, file_extension = os.path.splitext(file_path)
 
-    parser.add_argument('input_file', help='plik wejściowy')
-    parser.add_argument('output_file', help='plik wyjściowy')
-    parser.add_argument('format', type=str, help='Format pliku')
-
-    args = parser.parse_args()
-    
-def load_json_file(file_path):
-    with open(file_path, 'r') as file:
-        try:
-            data = json.load(file)
-            return data
-        except json.JSONDecodeError:
-            print('Błąd: Niepoprawny format pliku JSON.')
-            return None
-        
- 
- def load_yaml_file(file_path):
-    with open(file_path, 'r') as file:
-        try:
-            data = yaml.safe_load(file)
-            return data
-        except yaml.YAMLError:
-            print('Błąd: Niepoprawny format pliku YAML.')
-            return None
-          
-  def load_xml_file(file_path):
-    try:
-        tree = ET.parse(file_path)
-        root = tree.getroot()
-        return root
-    except ET.ParseError:
-        print('Błąd: Niepoprawny format pliku XML.')
+    if file_extension == '.xml':
+        return load_xml_file(file_path)
+    elif file_extension == '.json':
+        return load_json_file(file_path)
+    elif file_extension == '.yml' or file_extension == '.yaml':
+        return load_yaml_file(file_path)
+    else:
+        print("Unsupported file format")
         return None
-          
-  def save_json_file(data, file_path):
+
+def load_xml_file(file_path):
+    tree = ET.parse(file_path)
+    return tree
+
+def load_json_file(file_path):
+    with open(file_path) as file:
+        data = json.load(file)
+    return data
+
+def load_yaml_file(file_path):
+    with open(file_path) as file:
+        data = yaml.safe_load(file)
+    return data
+
+def save_file(data, file_path):
+    _, file_extension = os.path.splitext(file_path)
+
+    if file_extension == '.xml':
+        save_xml_file(data, file_path)
+    elif file_extension == '.json':
+        save_json_file(data, file_path)
+    elif file_extension == '.yml' or file_extension == '.yaml':
+        save_yaml_file(data, file_path)
+    else:
+        print("Unsupported file format")
+
+def save_xml_file(tree, file_path):
+    tree.write(file_path, encoding='utf-8', xml_declaration=True)
+
+def save_json_file(data, file_path):
     with open(file_path, 'w') as file:
         json.dump(data, file, indent=4)
-          
-  def save_yaml_file(data, file_path):
+
+def save_yaml_file(data, file_path):
     with open(file_path, 'w') as file:
-        yaml.dump(data, file)
-  
-  def save_xml_file(root, file_path):
-    tree = ET.ElementTree(root)
-    tree.write(file_path)
+        yaml.safe_dump(data, file)
 
 def convert_file(input_file_path, output_file_path):
     data = load_file(input_file_path)
