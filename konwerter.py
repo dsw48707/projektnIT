@@ -25,4 +25,13 @@ def load_json_file(file_path):
     with open(file_path, 'w') as file:
         json.dump(data, file, indent=4)
  
- 
+ def load_yaml_file(file_path):
+    with open(file_path, 'r') as file:
+        try:
+            data = yaml.safe_load(file)
+            return data
+        except yaml.YAMLError:
+            print('Błąd: Niepoprawny format pliku YAML.')
+            return None
+          
+  
