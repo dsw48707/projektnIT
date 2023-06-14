@@ -15,7 +15,7 @@ def load_file(file_path):
         return load_yaml_file(file_path)
     else:
         print("Unsupported file format")
-        return None
+        return None, None
 
 def load_xml_file(file_path):
     tree = ET.parse(file_path)
@@ -44,7 +44,7 @@ def save_file(data, file_path, tree=None):
     else:
         print("Unsupported file format")
 
-def save_xml_file(root, file_path, tree):
+def save_xml_file(root, file_path, tree=None):
     if tree is None:
         tree = ET.ElementTree(root)
     tree.write(file_path)
@@ -71,4 +71,5 @@ if __name__ == '__main__':
     output_file_path = sys.argv[2]
 
     convert_file(input_file_path, output_file_path)
+
 
